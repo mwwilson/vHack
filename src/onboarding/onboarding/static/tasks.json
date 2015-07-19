@@ -7,5 +7,12 @@
  {
      "description": "First interview for new employees",
      "link": "http://0.0.0.0:6543/interview"
+ },
+ "Offer Letter":
+ {
+     "description": "Offer letter available for download and signature",
+     "link": "/offer_letter_task"
  }
 }
+
+

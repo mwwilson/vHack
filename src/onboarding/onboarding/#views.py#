@@ -1,6 +1,6 @@
 from pyramid.security import Allow, Authenticated, remember, forget
 from pyramid.view import view_config
-from pyramid.response import Response, FileResponse
+from pyramid.response import Response
 
 def verify(users, creds):
     try:
@@ -58,12 +58,16 @@ def logout(request):
         )
 
 @view_config(route_name='offer_letter', renderer='templates/offer_letter.pt')
-def offer_letter(request):   
-    response = FileResponse(
-        '/home/mundt/vHack/src/onboarding/onboarding/offer_letters/test.txt', request=request)
-    return response
+def security_form(request):
+    """#creds = request.json_body
+    #file_id = request.GET['test.txt']
+    #filename = get_filename(file_id)
+    #headers  = request.response.headers
+    #headers['Content-Disposition'] = attachment; filename='test.txt'
+    #headers['Content-Type'] = 'application/force-download'
+    #headers['Accept-Ranges'] = 'bytes'
+    #headers['X-Accel-Redirect'] = ("/path/" + filename + ".txt")
+    #response = FileResponse(
+    #    '/home/Desktop/test.txt', request=request)
+    #return r
 
-@view_config(route_name='offer_letter_task', renderer='templates/offer_letter_task.pt')
-def offer_letter_task(request):
-    response = {'project':'onboarding'}
-    return response

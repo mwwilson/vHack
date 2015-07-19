@@ -52,5 +52,7 @@ def main(global_config, **settings):
     config.add_route('signup', '/signup')
     config.add_route('login_success', '/login_success')
     config.add_route('application', '/application')
+    config.add_route('offer_letter', '/offer_letter')
+    config.add_route('offer_letter_task', '/offer_letter_task')
     config.scan()
     return config.make_wsgi_app()
