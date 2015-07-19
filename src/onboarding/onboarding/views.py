@@ -64,5 +64,10 @@ def logout(request):
 #@view_config(route_name='submit')
 #def submit(request):
 #    task_name = request.json()['name']
-#    request.registry._get_settings()['users'][CURRENTUSERNAE][task_name] = "complete"
+#    request.registry._get_settings()['users'][request.cookies['username']][task_name] = "complete"
+
+@view_config(route_name='get_tasks')
+def get_tasks(request):
+    user_name = request.cookies['username']
+    return {'response': request.registry._get_settings()['users'][user_name]}
 
