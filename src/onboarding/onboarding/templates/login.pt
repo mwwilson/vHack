@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="${request.static_url('onboarding:static/pyramid-16x16.png')}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    <title>Welcome to vOnboard</title>
+    <title>Welcome to Onboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="//oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
@@ -45,6 +45,7 @@
                 success: function(responseText) {
                     document.getElementById("toast1").text = responseText;
                     document.querySelector('#toast1').show();
+	            window.location.href = "http://localhost:6543"
                     },
                 error: function() {
                     document.getElementById("toast1").text = "Error Logging in for User " + uname;
@@ -64,6 +65,7 @@
                 success: function(responseText) {
                     document.getElementById("toast1").text = responseText;
                     document.querySelector('#toast1').show();
+	            window.location.href = "http://localhost:6543"
                     },
                 error: function() {
                     document.getElementById("toast1").text = "Error Creating Account";
@@ -85,7 +87,7 @@
           <paper-toolbar id="mainToolbar">
             <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
             <span class="flex"></span>
-	    
+
             <!-- Toolbar icons -->
             <paper-icon-button icon="refresh"></paper-icon-button>
             <paper-icon-button icon="search"></paper-icon-button>
