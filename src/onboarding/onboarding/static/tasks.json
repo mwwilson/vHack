@@ -3,9 +3,9 @@
     "description": "Initial employee application",
     "link": "http://0.0.0.0:6543/application"
  },
- "Interview":
+ "Training":
  {
-     "description": "First interview for new employees",
-     "link": "http://0.0.0.0:6543/interview"
+     "description": "First training videos for employees. Python.",
+     "link": "http://0.0.0.0:6543/training"
  }
 }
