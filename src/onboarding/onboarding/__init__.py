@@ -42,7 +42,7 @@ def main(global_config, **settings):
 
     settings['users'] = {'marshall' : {'password' : 'viasat', 
                                        'tasks'    : {'Application' : 'complete',
-                                                     'Interview'   : 'incomplete'
+                                                     'Training'    : 'incomplete'
                                                     }
                                       },
                          'Ian'      : {'password' : 'aese',
