@@ -21,12 +21,12 @@
 }
   </style>
   <template>
-    <paper-material elevation="1" class="task">
+    <paper-material elevation="1" class="task" id = {{task_name}}>
       <center class = "paper-font-display1">{{task_name}}</center>
       <p>{{task_description}}</p>
       <!---<p>{{task_status}}</p>--->
       <paper-progress value={{task_progress}}></paper-progress>
-      <paper-button raised id="paper_button" center on-click="goLink">Work Task</paper-button>
+      <paper-button raised center id={{task_description}} on-click="goLink">Work Task</paper-button>
     </paper-material>
   </template>
 
@@ -46,5 +46,8 @@
   goLink: function(e) {
   window.location.href = this.task_link;
     },
+  complete: function() {
+  this.querySelector("#"+this.task_name).style.background="#76FF03"
+  }
   });  
 </script>

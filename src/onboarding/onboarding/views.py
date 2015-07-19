@@ -1,6 +1,7 @@
 from pyramid.security import Allow, Authenticated, remember, forget
-from pyramid.view import view_config
+from pyramid.view import view_config, forbidden_view_config
 from pyramid.response import Response, FileResponse
+
 
 def verify(users, creds):
     try:
@@ -16,9 +17,18 @@ def verify(users, creds):
 def my_view(request):
     return {'project': 'onboarding'}
 
+@view_config(route_name='admin', renderer='templates/admin.pt',
+             permission='assign')
+def admin(request):
+    return {'Project': 'Assignment Page'}
+
 @view_config(route_name='application', renderer='templates/application.pt')
 def application(request):
     return {'project': 'onboarding'}
+
+@forbidden_view_config(renderer='templates/login.pt')
+def forbidden(request):
+    return {"You must log in to see that" : "Young Padawan"}
 
 @view_config(route_name='login', renderer='templates/login.pt')
 def login(request):
@@ -31,10 +41,17 @@ def signup(request):
     users[creds['username']] = {'password':creds['password']}
     userid = creds['username']
     headers = remember(request, userid)
-    return Response(
-        'Account for user %s created' % userid,
+    toReturn = Response(
+        'Account for User %s Created' % userid,
         headers=headers
         )
+    toReturn.set_cookie('username', userid)
+    return toReturn
+
+
+@view_config(route_name='germantown', renderer='templates/germantown.pt')
+def germantown(request):
+    return {'project' : 'onboarding'}
 
 @view_config(route_name='login_success')
 def login_success(request):
@@ -42,12 +59,14 @@ def login_success(request):
     userid = verify(request.registry._get_settings()['users'], creds)
     if userid:
         headers = remember(request, userid)
-        return Response(
-            'Logged in as %s' % userid,
+        toReturn = Response(
+            'Logged in as User %s' % userid,
             headers=headers
             )
+        toReturn.set_cookie('username', userid)
+        return toReturn
     else:
-        return Response('Login attempt failed')
+        return Response('Login Attempt Failed for User %s' % (creds['username']))
 
 @view_config(route_name='logout')
 def logout(request):
@@ -67,3 +86,34 @@ def offer_letter(request):
 def offer_letter_task(request):
     response = {'project':'onboarding'}
     return response
+
+@view_config(route_name='submit', renderer="json")
+def submit(request):
+    task_name = request.matchdict['taskname']
+    request.registry._get_settings()['users'][request.cookies['username']][task_name] = "complete"
+    return {'response': 'completed'}
+
+@view_config(route_name='get_tasks', renderer="json")
+def get_tasks(request):
+    user_name = request.cookies['username']
+    return {'response': request.registry._get_settings()['users'][user_name]['tasks']}
+
+@view_config(route_name='get_users_and_tasks', renderer='json', permission='assign')
+def get_users_and_tasks(request):
+    users = request.registry._get_settings()['users']
+    return users
+
+@view_config(route_name='add_task', renderer="json", permission="assign")
+def add_task(request):
+    try:
+        user = request.matchdict['user']
+        task = request.matchdict['task']
+        request.registry._get_settings()['users'][user]['tasks'][task] = 'incomplete'
+        return Response("Task %s added to user %s" % (task, user))
+    except:
+        return Response("Error. Task not added")
+
+@view_config(route_name='training', renderer='templates/training.pt')
+def training(request):
+    return {'project': 'onboarding'}
+>>>>>>> d3e9bffc1b31690291393aae24ab7a7e894e0683

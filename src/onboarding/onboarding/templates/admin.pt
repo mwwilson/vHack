@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pyramid web application">
+    <meta name="author" content="Pylons Project">
+    <link rel="shortcut icon" href="${request.static_url('onboarding:static/pyramid-16x16.png')}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <title>Onboarding Revamp</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this scaffold -->
+    <link href="${request.static_url('onboarding:static/theme.css')}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+	<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="${request.static_url('onboarding:static/styles/main.css')}">
+    <!-- endbuild-->
+
+    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="${request.static_url('onboarding:static/bower_components/webcomponentsjs/webcomponents-lite.js')}"></script>
+    <!-- endbuild -->
+    
+    <!-- will be replaced with elements/elements.vulcanized.html -->
+    <link rel="import" href="${request.static_url('onboarding:static/elements/elements.html')}">
+    <!-- endreplace-->
+  </head>
+  
+  <body unresolved class="fullbleed layout vertical">
+    <span id="browser-sync-binding"></span>
+    <template is="dom-bind" id="app">
+      
+      <paper-drawer-panel id="paperDrawerPanel">
+	<div drawer>
+
+          <!-- Drawer Toolbar -->
+          <paper-toolbar id="drawerToolbar">
+            <span class="paper-font-title">Menu</span>
+          </paper-toolbar>
+	  
+          <!-- Drawer Content -->
+          <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+            <a data-route="home" href="#">
+              <iron-icon icon="home"></iron-icon>
+              <span>Home</span>
+            </a>
+	    
+            <a data-route="tasks" href="#" id="taskbuttononbar">
+              <iron-icon icon="info"></iron-icon>
+              <span>Tasks</span>
+            </a>
+	    
+            <a data-route="assign" href="#">
+              <iron-icon icon="mail"></iron-icon>
+              <span>Assign</span>
+            </a>
+          </paper-menu>
+	</div>
+	<paper-header-panel main mode="waterfall-tall">
+	  
+          <!-- Main Toolbar -->
+          <paper-toolbar id="mainToolbar">
+            <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+            <span class="flex"></span>
+	    
+            <!-- Toolbar icons -->
+            <paper-icon-button icon="refresh"></paper-icon-button>
+            <paper-icon-button icon="search"></paper-icon-button>
+	    
+            <!-- Application name -->
+            <div class="middle paper-font-display2 app-name">Admin Status Page</div>
+	    
+            <!-- Application sub title -->
+            <div class="bottom title"></div>
+	    
+          </paper-toolbar>
+	  
+          <!-- Main Content -->
+          <div class="content">
+            <iron-pages attr-for-selected="data-route" selected="{{route}}">
+	      
+              <section data-route="home">
+		<paper-material elevation="1">
+                  <my-greeting></my-greeting>
+		  
+                  <p class="paper-font-subhead">You now have:</p>
+                  <my-list></my-list>
+		  
+                  <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+		</paper-material>
+		<paper-material elevation="1">
+                  <p class="paper-font-body2">This is another card.</p>
+		</paper-material>
+				
+              </section>
+	      
+              <section data-route="tasks" id="tasklist">
+		<paper-toolbar>
+		  <h2 class="paper-font-display1">Assigned Tasks</h2>
+		</paper-toolbar>
+            <script>		
+            function initializeData(){
+                $.ajax({
+                    url: "static/tasks.json",
+                dataType: 'text',
+                cache: false,
+                success: function(dd){
+                    var ddd = JSON.parse(dd)
+                    var td = document.getElementById("task_dropdown")
+                    for (i = 0; i < Object.keys(ddd).length; i++) {
+                        temp = document.createElement("option")
+                        temp.innerHTML = Object.keys(ddd)[i]
+                        temp.setAttribute("value", Object.keys(ddd)[i])
+                        td.appendChild(temp)
+                    }
+                    return ddd;
+                    },
+                });
+            }
+            function continue_processing() {
+                $.ajax({
+                    url: "../get_users_and_tasks",
+                    dataType: 'json',
+                    cache: false,
+                    success: function(data){
+                        do_more(data);
+                        }
+                    });
+             }
+
+            function do_more(data) {
+		console.log(data)
+                tl = document.getElementById("tasklist")
+                var ud = document.getElementById('user_dropdown')
+                count = 0;
+                while (count < Object.keys(data).length) {
+                    var user = Object.keys(data)[count]
+                    if (user == "admin") {
+                        count = count + 1;
+                        continue;
+                    }
+                    var mat = document.createElement('paper-material')
+                    temp = document.createElement("option")
+                    temp.innerHTML = user
+                    temp.setAttribute("value", user)
+                    ud.appendChild(temp)
+                    
+                    mat.innerHTML = "<h2>" + user + "</h2"
+                    ccount = 0;
+                    task_dict = data[user]["tasks"]
+                    while (ccount < Object.keys(task_dict).length) {
+                        task_name = Object.keys(task_dict)[ccount]
+                        if (task_dict[task_name] == "incomplete") {
+                            var elem = document.createElement("paper-icon-item")
+                            elem.innerHTML = "<iron-icon icon='hourglass-empty' item-icon></iron-icon>" + task_name
+                        }
+                        else {
+                            var elem = document.createElement("paper-icon-item")
+                            elem.innerHTML = "<iron-icon icon='check' item-icon></iron-icon>" + task_name
+                        }
+                        mat.appendChild(elem)
+                        var br = document.createElement("br")
+                        mat.appendChild(br)
+
+                        ccount = ccount + 1
+                    }
+                    tl.appendChild(mat)
+                    count = count + 1
+                }
+                
+            }
+	
+	    function processEverything(){
+		while(document.getElementById("tasklist").childNodes.length > 1){
+			 document.getElementById("tasklist").removeChild(document.getElementById("tasklist").lastChild)      
+			 }
+		while(document.getElementById("task_dropdown").childNodes.length > 1){
+			 document.getElementById("task_dropdown").removeChild(document.getElementById("task_dropdown").lastChild)      
+			 }
+		while(document.getElementById("user_dropdown").childNodes.length > 1){
+			 document.getElementById("user_dropdown").removeChild(document.getElementById("user_dropdown").lastChild)      
+			 }
+		var all_tasks = initializeData();
+		continue_processing();
+	    }
+            $(document).ready(function() {
+                var all_tasks = initializeData();
+                continue_processing();
+		document.getElementById("taskbuttononbar").onclick=processEverything;
+            });
+				    
+
+            function addTask() {
+                var task_dd = document.getElementById("task_dropdown")
+                var task = task_dd.options[task_dd.selectedIndex].value
+                console.log(task)
+                var user_dd = document.getElementById("user_dropdown")
+                var user = user_dd.options[user_dd.selectedIndex].value
+                console.log(user)
+
+                toSend = JSON.stringify({'user': user, 'task': task})
+                $.ajax({
+                    type: "POST",
+                    url: "../add_task/" + user + "/" + task,
+                    data: toSend,
+                    success: function(responseText) {
+                        document.getElementById("toast1").text = "Successfully Added Task to User";
+                        document.querySelector('#toast1').show();
+                        },
+                    error: function() {
+                        document.getElementById("toast1").text = "Error Adding Task for User " + user;
+                        document.querySelector('#toast1').show();
+                        }
+                    })
+            }
+            </script>
+
+
+              </section>
+	      
+              <section data-route="assign">
+            <paper-toolbar>
+              <h2 class="paper-font-display1">Assign New Tasks</h2>
+            </paper-toolbar>
+		<paper-material id="assignlist" elevation="1">
+        <p> Assign Task:
+        <select id="task_dropdown">
+        </select>
+
+        To User:
+
+        <select id="user_dropdown">
+        </select>
+        <div>
+        <paper-button onclick="addTask()" raised>Add!</paper-button>
+        </div>
+		</paper-material>
+              </section>
+	      
+            </iron-pages>
+          </div>
+	</paper-header-panel>
+      </paper-drawer-panel>
+      
+      <paper-toast id="caching-complete"
+                   duration="6000"
+                   text="Caching complete! This app will work offline.">
+      </paper-toast>
+      
+      <platinum-sw-register auto-register
+                            clients-claim
+                            skip-waiting
+                            on-service-worker-installed="displayInstalledToast">
+	<platinum-sw-cache default-cache-strategy="networkFirst"
+                           precache-file="precache.json">
+	</platinum-sw-cache>
+      </platinum-sw-register>
+      
+          <paper-toast id="toast1" text=""></paper-toast>
+    </template>
+    
+    <!-- build:js scripts/app.js -->
+    <script src="${request.static_url('onboarding:static/scripts/app.js')}"></script>
+    <!-- endbuild-->
+  </body>
+  
+  
+</html>

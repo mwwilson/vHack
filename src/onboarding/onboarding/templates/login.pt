@@ -35,7 +35,6 @@
     <script>
 
         function submitData() {
-            console.log("help");
             var uname = document.getElementById("login-un").value;
             var pword = document.getElementById("login-pw").value;
             toSend = JSON.stringify({'username': uname, 'password': pword})
@@ -44,16 +43,17 @@
                 url: "../login_success",
                 data: toSend,
                 success: function(responseText) {
-                    alert(responseText);
+                    document.getElementById("toast1").text = responseText;
+                    document.querySelector('#toast1').show();
                     },
                 error: function() {
-                    alert("Bad boy");
+                    document.getElementById("toast1").text = "Error Logging in for User " + uname;
+                    document.querySelector('#toast1').show();
                     }
                 })
           }
 
         function signup() {
-            console.log("help");
             var uname = document.getElementById("signup-un").value;
             var pword = document.getElementById("signup-pw").value;
             toSend = JSON.stringify({'username': uname, 'password': pword})
@@ -62,10 +62,12 @@
                 url: "../signup",
                 data: toSend,
                 success: function(responseText) {
-                    alert(responseText);
+                    document.getElementById("toast1").text = responseText;
+                    document.querySelector('#toast1').show();
                     },
                 error: function() {
-                    alert("Bad boy");
+                    document.getElementById("toast1").text = "Error Creating Account";
+                    document.querySelector('#toast1').show();
                     }
                 })
           }
@@ -104,7 +106,6 @@
           <paper-input id="login-un" label="Username" auto-validate pattern="[a-zA-Z0-9]*" error-message="Letters and Numbers Only"></paper-input>
 
           <paper-input id="login-pw" label="Password" type="password"></paper-input>
-          <br>
           <paper-button raised type='submit' id="login-submit" onclick="submitData()">
             <iron-icon icon="check"></iron-icon>Submit
           </paper-button>
@@ -116,12 +117,13 @@
           <paper-input id="signup-un" label="Username" auto-validate pattern="[a-zA-Z0-9]*" error-message="Letters and Numbers Only"></paper-input>
 
           <paper-input id="signup-pw" label="Password" type="password"></paper-input>
-          <br>
           <paper-button raised type='submit' id="signup-submit" onclick="signup()">
             <iron-icon icon="check"></iron-icon>Submit
           </paper-button>
           </form>
       </paper-material>
+          <paper-toast id="toast1" text=""></paper-toast>
+          <paper-toast id="toast2" text=""></paper-toast>
     </template>
     
     <!-- build:js scripts/app.js -->

@@ -70,7 +70,7 @@
             <paper-icon-button icon="search"></paper-icon-button>
 	    
             <!-- Application name -->
-            <div class="middle paper-font-display2 app-name">Application</div>
+            <div class="middle paper-font-display2 app-name">Training</div>
 	    
             <!-- Application sub title -->
             <div class="bottom title"></div>
@@ -79,24 +79,31 @@
 	  
           <!-- Main Content -->
           <div class="content">
-	    <div>
-	      <paper-material>
-		<paper-input label="First Name"></paper-input>
-		<paper-input label="Last Name"></paper-input>
-		<paper-input label="Date of Birth"></paper-input>
-	      </paper-material>  
-	    </div>
+	   <div>
+	     <google-youtube
+		video-id="cpPG0bKHYKc"
+		height="540px"
+		width="960px"
+		rel="0"
+		start="0"
+		autoplay="1">
+	     </google-youtube>
+	   </div>
 
-	    <div>
-	      <paper-material>
-		<paper-input label="Email"></paper-input>
-		<paper-input label="Phone"></paper-input>
-	      </paper-material>
-            </div>
+	   <div>
+             <h4>What is Python?</h4>
+             <div class="horizontal-section">
+               <paper-radio-group selected="c">
+		 <paper-radio-button name="o">A snake</paper-radio-button>
+		 <paper-radio-button name="c">A programming language</paper-radio-button>
+		 <paper-radio-button name="h">A large bicep</paper-radio-button>
+		 <paper-radio-button name="n">An addition to the databus</paper-radio-button>
+               </paper-radio-group>
+             </div>
 	    
 	    <div>
-	      <paper-button raised id="application_submit">Submit!</paper-button>
-	      <script src="${request.static_url('onboarding:static/scripts/application.js')}"></script>
+	      <paper-button raised id="training_submit">Submit!</paper-button>
+	      <script src="${request.static_url('onboarding:static/scripts/training.js')}"></script>
 	      
 	    </div>
 	  </div>
