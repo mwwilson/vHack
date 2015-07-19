@@ -57,4 +57,8 @@ def logout(request):
         headers=headers
         )
 
-@view_config(route_name='submit')
+#@view_config(route_name='submit')
+#def submit(request):
+#    task_name = request.json()['name']
+#    request.registry._get_settings()['users'][CURRENTUSERNAE][task_name] = "complete"
+
