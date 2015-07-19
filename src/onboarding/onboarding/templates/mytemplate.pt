@@ -66,9 +66,9 @@
               <span>Tasks</span>
             </a>
 	    
-            <a data-route="contact" href="#">
+            <a data-route="help" href="#">
               <iron-icon icon="mail"></iron-icon>
-              <span>Contact</span>
+              <span>Help</span>
             </a>
           </paper-menu>
 	</div>
@@ -117,10 +117,12 @@
 		<script src="${request.static_url('onboarding:static/scripts/loadtasks.js')}"></script>
 		<script>
             function submitChatMessage() {
+                var name = document.cookie.split("=")[2]
                 typer = document.getElementById("typer")
                 cl = document.getElementById("chatlist")
                 temp = document.createElement("paper-material")
-                temp.innerHTML = typer.value
+                temp.innerHTML = "<iron-icon icon='face'></iron-icon><strong>" + name +
+                                    ": </strong>" + typer.value
                 typer.value = ""
                 cl.insertBefore(temp, cl.childNodes[cl.childNodes.length - 2])
             }
@@ -137,10 +139,11 @@
 		</paper-material>
               </section>
 	      
-              <section data-route="contact" id="chatlist">
+              <section data-route="help" id="chatlist">
 		<paper-material elevation="1">
-                  <h2 class="paper-font-display2">Contact</h2>
-                  <p>This is the contact section</p>
+                  <h2 class="paper-font-display2">Help</h2>
+                  <p>This is the section for any questions regarding the onboarding process.
+                     Feel free to reach out with your questions!</p>
 		</paper-material>
         <div>
 		<paper-material id="footer"  elevation="1">
