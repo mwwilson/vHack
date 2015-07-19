@@ -1,6 +1,7 @@
 from pyramid.security import Allow, Authenticated, remember, forget
 from pyramid.view import view_config, forbidden_view_config
-from pyramid.response import Response
+from pyramid.response import Response, FileResponse
+
 
 def verify(users, creds):
     try:
@@ -76,6 +77,17 @@ def logout(request):
         'Logged out',
         headers=headers
         )
+
+@view_config(route_name='offer_letter', renderer='templates/offer_letter.pt')
+def offer_letter(request):   
+    response = FileResponse(
+        '/home/mundt/vHack/src/onboarding/onboarding/offer_letters/test.txt', request=request)
+    return response
+
+@view_config(route_name='offer_letter_task', renderer='templates/offer_letter_task.pt')
+def offer_letter_task(request):
+    response = {'project':'onboarding'}
+    return response
 
 @view_config(route_name='submit', renderer="json")
 def submit(request):
