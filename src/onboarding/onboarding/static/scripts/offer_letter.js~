@@ -1,0 +1,11 @@
+function download_offer(){
+        success: function(data){
+            window.location.href = "http://localhost:6543/offer_letter";
+        },
+    });
+
+}
+
+$(document).ready(function(){
+    document.getElementById("offer_letter_download").onclick = download_offer})
+
