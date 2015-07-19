@@ -1,0 +1,45 @@
+<dom-module id = "task-card">
+
+  
+  <style>
+    .task {
+    width: calc(98% - 46px);
+    margin-bottom: 32px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+    .task {
+    border-radius: 2px;
+    height: 100%;
+    padding: 16px 30px;
+    margin: 16px auto;
+    background: #FFF none repeat scroll 0% 0%;
+    }
+
+    
+}
+  </style>
+  <template>
+    <paper-material elevation="1" class="task">
+      <center class = "paper-font-display1">{{task_name}}</center>
+      <p>{{task_description}}</p>
+      <!---<p>{{task_status}}</p>--->
+      <paper-progress value={{task_progress}}></paper-progress>
+      <paper-button raised id="paper_button" center>Work Task</paper-button>
+    </paper-material>
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+  is: "task-card",
+  properties: {
+  task_name: {type: String, value: "Default Task Name"},
+  task_description: {type: String, value: "Default Task Description"},
+  task_status: {type: String, value: "No Progress"},
+  task_progress: {type: String, value: "0"},
+  task_link: {type: String, value: "http://0.0.0.0:6543"},
+  },
+  });  
+</script>
