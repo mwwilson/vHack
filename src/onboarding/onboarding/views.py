@@ -116,4 +116,3 @@ def add_task(request):
 @view_config(route_name='training', renderer='templates/training.pt')
 def training(request):
     return {'project': 'onboarding'}
->>>>>>> d3e9bffc1b31690291393aae24ab7a7e894e0683
