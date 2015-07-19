@@ -69,5 +69,5 @@ def logout(request):
 @view_config(route_name='get_tasks')
 def get_tasks(request):
     user_name = request.cookies['username']
-    return {'response': request.registry._get_settings()['users'][user_name]}
+    return {'response': request.registry._get_settings()['users'][user_name]['tasks']}
 
