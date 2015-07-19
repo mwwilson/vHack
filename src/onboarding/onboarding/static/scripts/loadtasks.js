@@ -14,6 +14,7 @@ function loadCards(){
 
 function initializeData(data1){
     dictionary = JSON.parse(data1);
+    dictionary = dictionary['response'];
 
     $.ajax({
         url: "static/tasks.json",
@@ -35,7 +36,6 @@ function continueData(data){
 
 function processData(count){
     var task;
-
     if(count >= Object.keys(allTasks).length){
 	return;
     }
@@ -47,13 +47,12 @@ function processData(count){
 }
 
 function addData(task, count){
-    
-    if(Object.keys(dictionary).contains(task))
+    if(Object.keys(dictionary).indexOf(task) != -1)
 	{
 	    section = document.getElementById("tasklist");
 	    html = "<task-card task_name = '" + task + "' task_description='" + 
-		dictionary[task]['description'] + "' task_link = '" +
-		dictionary[task]['link'] + "'></task-card>"
+		allTasks[task]['description'] + "' task_link = '" +
+		allTasks[task]['link'] + "'></task-card>"
 	    section.innerHTML = section.innerHTML += html
 	}
     processData(count + 1)

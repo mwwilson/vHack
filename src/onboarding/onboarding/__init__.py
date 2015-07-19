@@ -41,12 +41,12 @@ def main(global_config, **settings):
     authz_policy = ACLAuthorizationPolicy()
 
     settings['users'] = {'marshall' : {'password' : 'viasat', 
-                                       'tasks'    : {'application' : 'complete',
-                                                     'interview'   : 'incomplete'
+                                       'tasks'    : {'Application' : 'complete',
+                                                     'Interview'   : 'incomplete'
                                                     }
                                       },
                          'Ian'      : {'password' : 'aese',
-                                       'tasks'    : {'application' : 'incomplete'
+                                       'tasks'    : {'Application' : 'incomplete'
                                                     }
                                       },
                          'admin'    : {'password' : 'admin',
