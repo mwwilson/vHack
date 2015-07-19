@@ -49,11 +49,20 @@ function processData(count){
 function addData(task, count){
     if(Object.keys(dictionary).indexOf(task) != -1)
 	{
-	    section = document.getElementById("tasklist");
-	    html = "<task-card task_name = '" + task + "' task_description='" + 
-		allTasks[task]['description'] + "' task_link = '" +
-		allTasks[task]['link'] + "'></task-card>"
-	    section.innerHTML = section.innerHTML += html
+	    var card = document.createElement("task-card")
+	    card.setAttribute("id", task)
+	    card.setAttribute("task_description", allTasks[task]['description'])
+	    card.setAttribute("task_link", allTasks[task]['link'])
+	    card.setAttribute("task_name", task)
+	    
+	    if(dictionary[task] == 'complete'){
+		//card.goLink()
+		
+	    }
+
+	    document.getElementById("tasklist").appendChild(card)
+
+	   
 	}
     processData(count + 1)
      
