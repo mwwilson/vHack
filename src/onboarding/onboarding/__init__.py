@@ -39,6 +39,7 @@ def main(global_config, **settings):
     authn_policy = AuthTktAuthenticationPolicy('soseekrit')
     authz_policy = ACLAuthorizationPolicy()
 
+    settings['users'] = {}
     config = Configurator(settings=settings,
         root_factory=root_factory,
         authentication_policy=authn_policy,
@@ -48,6 +49,8 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
+    config.add_route('signup', '/signup')
+    config.add_route('login_success', '/login_success')
     config.add_route('application', '/application')
     config.scan()
     return config.make_wsgi_app()

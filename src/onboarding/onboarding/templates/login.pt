@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pyramid web application">
+    <meta name="author" content="Pylons Project">
+    <link rel="shortcut icon" href="${request.static_url('onboarding:static/pyramid-16x16.png')}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <title>Welcome to vOnboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this scaffold -->
+    <link href="${request.static_url('onboarding:static/theme.css')}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+	<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="${request.static_url('onboarding:static/styles/main.css')}">
+    <!-- endbuild-->
+
+    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="${request.static_url('onboarding:static/bower_components/webcomponentsjs/webcomponents-lite.js')}"></script>
+    <!-- endbuild -->
+    
+    <!-- will be replaced with elements/elements.vulcanized.html -->
+    <link rel="import" href="${request.static_url('onboarding:static/elements/elements.html')}">
+    <script>
+
+        function submitData() {
+            console.log("help");
+            var uname = document.getElementById("login-un").value;
+            var pword = document.getElementById("login-pw").value;
+            toSend = JSON.stringify({'username': uname, 'password': pword})
+            $.ajax({
+                type: "POST",
+                url: "../login_success",
+                data: toSend,
+                success: function(responseText) {
+                    alert(responseText);
+                    },
+                error: function() {
+                    alert("Bad boy");
+                    }
+                })
+          }
+
+        function signup() {
+            console.log("help");
+            var uname = document.getElementById("signup-un").value;
+            var pword = document.getElementById("signup-pw").value;
+            toSend = JSON.stringify({'username': uname, 'password': pword})
+            $.ajax({
+                type: "POST",
+                url: "../signup",
+                data: toSend,
+                success: function(responseText) {
+                    alert(responseText);
+                    },
+                error: function() {
+                    alert("Bad boy");
+                    }
+                })
+          }
+    </script>
+    <!-- endreplace-->
+  </head>
+  
+  <body unresolved class="fullbleed layout vertical">
+    <span id="browser-sync-binding"></span>
+    <template is="dom-bind" id="app">
+      
+	<paper-header-panel main mode="waterfall-tall">
+	  
+          <!-- Main Toolbar -->
+          <paper-toolbar id="mainToolbar">
+            <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+            <span class="flex"></span>
+	    
+            <!-- Toolbar icons -->
+            <paper-icon-button icon="refresh"></paper-icon-button>
+            <paper-icon-button icon="search"></paper-icon-button>
+	    
+            <!-- Application name -->
+            <div class="middle paper-font-display2 app-name">Login Page</div>
+	    
+            <!-- Application sub title -->
+            <div class="bottom title"></div>
+	    
+          </paper-toolbar>
+	  
+          <!-- Main Content -->
+	</paper-header-panel>
+      <paper-material>  
+        <h2> Login!</h2>
+          <form action='/login_success'>
+          <paper-input id="login-un" label="Username" auto-validate pattern="[a-zA-Z0-9]*" error-message="Letters and Numbers Only"></paper-input>
+
+          <paper-input id="login-pw" label="Password" type="password"></paper-input>
+          <br>
+          <paper-button raised type='submit' id="login-submit" onclick="submitData()">
+            <iron-icon icon="check"></iron-icon>Submit
+          </paper-button>
+          </form>
+      </paper-material>  
+      <paper-material>  
+        <h2>Don't Have an Account? Sign Up!</h2>
+          <form action='/signup'>
+          <paper-input id="signup-un" label="Username" auto-validate pattern="[a-zA-Z0-9]*" error-message="Letters and Numbers Only"></paper-input>
+
+          <paper-input id="signup-pw" label="Password" type="password"></paper-input>
+          <br>
+          <paper-button raised type='submit' id="signup-submit" onclick="signup()">
+            <iron-icon icon="check"></iron-icon>Submit
+          </paper-button>
+          </form>
+      </paper-material>
+    </template>
+    
+    <!-- build:js scripts/app.js -->
+    <script src="${request.static_url('onboarding:static/scripts/app.js')}"></script>
+    <!-- endbuild-->
+  </body>
+  
+  
+</html>
