@@ -16,6 +16,11 @@ def verify(users, creds):
 def my_view(request):
     return {'project': 'onboarding'}
 
+@view_config(route_name='admin', renderer='templates/admin.pt',
+             permission='assign')
+def admin(request):
+    return {'Project': 'Assignment Page'}
+
 @view_config(route_name='application', renderer='templates/application.pt')
 def application(request):
     return {'project': 'onboarding'}

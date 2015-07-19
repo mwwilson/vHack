@@ -29,7 +29,8 @@ class Resource(object):
 def root_factory(request):
     root = Resource(
         '',
-        acl=[(Allow, Authenticated, 'view')]
+        acl=[(Allow, Authenticated, 'view'),
+             (Allow, 'admin', 'assign')]
         )
     return root
 
@@ -47,6 +48,9 @@ def main(global_config, **settings):
                          'Ian'      : {'password' : 'aese',
                                        'tasks'    : {'application' : 'incomplete'
                                                     }
+                                      },
+                         'admin'    : {'password' : 'admin',
+                                       'tasks'    : {}
                                       }
                             }
     config = Configurator(settings=settings,
