@@ -117,12 +117,10 @@
 		<script src="${request.static_url('onboarding:static/scripts/loadtasks.js')}"></script>
 		<script>
             function submitChatMessage() {
-                var name = document.cookie.split("=")[2]
                 typer = document.getElementById("typer")
                 cl = document.getElementById("chatlist")
                 temp = document.createElement("paper-material")
-                temp.innerHTML = "<iron-icon icon='face'></iron-icon><strong>" + name +
-                                    ": </strong>" + typer.value
+                temp.innerHTML = "<strong><iron-icon icon='face'></iron-icon>:</strong>" + typer.value
                 typer.value = ""
                 cl.insertBefore(temp, cl.childNodes[cl.childNodes.length - 2])
             }

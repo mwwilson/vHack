@@ -5,13 +5,18 @@
  },
  "Training":
  {
-     "description": "First interview for new employees",
-     "link": "http://0.0.0.0:6543/interview"
+     "description": "First video training",
+     "link": "http://0.0.0.0:6543/training"
  },
- "Offer Letter":
+ "Germantown":
+ {
+     "description": "Relevant new hire information about the ComSat office",
+     "link": "http://0.0.0.0:6543/germantown"
+ },
+ "Offer_Letter":
  {
      "description": "Offer letter available for download and signature",
-     "link": "/offer_letter_task"
+     "link": "http://0.0.0.0:6543/offer_letter_task"
  }
 }
 
