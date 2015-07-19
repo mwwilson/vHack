@@ -14,7 +14,6 @@ def verify(users, creds):
 @view_config(route_name='home', renderer='templates/mytemplate.pt',
              permission='view')
 def my_view(request):
-    import pdb; pdb.set_trace()
     return {'project': 'onboarding'}
 
 @view_config(route_name='application', renderer='templates/application.pt')
