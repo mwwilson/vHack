@@ -59,9 +59,9 @@
               <span>Tasks</span>
             </a>
 	    
-            <a data-route="contact" href="#">
+            <a data-route="assign" href="#">
               <iron-icon icon="mail"></iron-icon>
-              <span>Contact</span>
+              <span>Assign</span>
             </a>
           </paper-menu>
 	</div>
@@ -77,7 +77,7 @@
             <paper-icon-button icon="search"></paper-icon-button>
 	    
             <!-- Application name -->
-            <div class="middle paper-font-display2 app-name">Onboarding</div>
+            <div class="middle paper-font-display2 app-name">Admin Status Page</div>
 	    
             <!-- Application sub title -->
             <div class="bottom title"></div>
@@ -105,27 +105,127 @@
 	      
               <section data-route="tasks" id="tasklist">
 		<paper-toolbar>
-		  <h2 class="paper-font-display1">Tasks</h2>
+		  <h2 class="paper-font-display1">Assigned Tasks</h2>
 		</paper-toolbar>
-		<script src="${request.static_url('onboarding:static/scripts/loadtasks.js')}"></script>
-		
+            <script>		
+            function initializeData(){
+                $.ajax({
+                    url: "static/tasks.json",
+                dataType: 'text',
+                cache: false,
+                success: function(dd){
+                    var ddd = JSON.parse(dd)
+                    var td = document.getElementById("task_dropdown")
+                    for (i = 0; i < Object.keys(ddd).length; i++) {
+                        temp = document.createElement("option")
+                        temp.innerHTML = Object.keys(ddd)[i]
+                        temp.setAttribute("value", Object.keys(ddd)[i])
+                        td.appendChild(temp)
+                    }
+                    return ddd;
+                    },
+                });
+            }
+            function continue_processing() {
+                $.ajax({
+                    url: "../get_users_and_tasks",
+                    dataType: 'json',
+                    cache: false,
+                    success: function(data){
+                        do_more(data);
+                        }
+                    });
+             }
+
+            function do_more(data) {
+                tl = document.getElementById("tasklist")
+                var ud = document.getElementById('user_dropdown')
+                count = 0;
+                while (count < Object.keys(data).length) {
+                    var user = Object.keys(data)[count]
+                    if (user == "admin") {
+                        count = count + 1;
+                        continue;
+                    }
+                    var mat = document.createElement('paper-material')
+                    temp = document.createElement("option")
+                    temp.innerHTML = user
+                    temp.setAttribute("value", user)
+                    ud.appendChild(temp)
+                    
+                    mat.innerHTML = "<h2>" + user + "</h2"
+                    ccount = 0;
+                    task_dict = data[user]["tasks"]
+                    while (ccount < Object.keys(task_dict).length) {
+                        task_name = Object.keys(task_dict)[ccount]
+                        if (task_dict[task_name] == "incomplete") {
+                            var elem = document.createElement("paper-icon-item")
+                            elem.innerHTML = "<iron-icon icon='hourglass-empty' item-icon></iron-icon>" + task_name
+                        }
+                        else {
+                            var elem = document.createElement("paper-icon-item")
+                            elem.innerHTML = "<iron-icon icon='check' item-icon></iron-icon>" + task_name
+                        }
+                        mat.appendChild(elem)
+                        var br = document.createElement("br")
+                        mat.appendChild(br)
+
+                        ccount = ccount + 1
+                    }
+                    tl.appendChild(mat)
+                    count = count + 1
+                }
+                
+            }
+            $(document).ready(function() {
+                var all_tasks = initializeData();
+                continue_processing();
+            });
+
+            function addTask() {
+                var task_dd = document.getElementById("task_dropdown")
+                var task = task_dd.options[task_dd.selectedIndex].value
+                console.log(task)
+                var user_dd = document.getElementById("user_dropdown")
+                var user = user_dd.options[user_dd.selectedIndex].value
+                console.log(user)
+
+                toSend = JSON.stringify({'user': user, 'task': task})
+                $.ajax({
+                    type: "POST",
+                    url: "../add_task/" + user + "/" + task,
+                    data: toSend,
+                    success: function(responseText) {
+                        document.getElementById("toast1").text = "Successfully Added Task to User";
+                        document.querySelector('#toast1').show();
+                        },
+                    error: function() {
+                        document.getElementById("toast1").text = "Error Adding Task for User " + user;
+                        document.querySelector('#toast1').show();
+                        }
+                    })
+            }
+            </script>
+
 
               </section>
 	      
-	      
-              <section data-route="user-info">
-		<paper-material elevation="1">
-                  <h2 class="paper-font-display2">
-                    User:<span>{{params.name}}</span>
-                  </h2>
-                  <div>This is <span>{{params.name}}</span>'s section</div>
-		</paper-material>
-              </section>
-	      
-              <section data-route="contact">
-		<paper-material elevation="1">
-                  <h2 class="paper-font-display2">Contact</h2>
-                  <p>This is the contact section</p>
+              <section data-route="assign">
+            <paper-toolbar>
+              <h2 class="paper-font-display1">Assign New Tasks</h2>
+            </paper-toolbar>
+		<paper-material id="assignlist" elevation="1">
+        <p> Assign Task:
+        <select id="task_dropdown">
+        </select>
+
+        To User:
+
+        <select id="user_dropdown">
+        </select>
+        <div>
+        <paper-button onclick="addTask()" raised>Add!</paper-button>
+        </div>
 		</paper-material>
               </section>
 	      
@@ -148,6 +248,7 @@
 	</platinum-sw-cache>
       </platinum-sw-register>
       
+          <paper-toast id="toast1" text=""></paper-toast>
     </template>
     
     <!-- build:js scripts/app.js -->
