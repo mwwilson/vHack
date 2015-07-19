@@ -54,7 +54,7 @@
               <span>Home</span>
             </a>
 	    
-            <a data-route="tasks" href="#">
+            <a data-route="tasks" href="#" id="taskbuttononbar">
               <iron-icon icon="info"></iron-icon>
               <span>Tasks</span>
             </a>
@@ -138,6 +138,7 @@
              }
 
             function do_more(data) {
+		console.log(data)
                 tl = document.getElementById("tasklist")
                 var ud = document.getElementById('user_dropdown')
                 count = 0;
@@ -177,10 +178,26 @@
                 }
                 
             }
+	
+	    function processEverything(){
+		while(document.getElementById("tasklist").childNodes.length > 1){
+			 document.getElementById("tasklist").removeChild(document.getElementById("tasklist").lastChild)      
+			 }
+		while(document.getElementById("task_dropdown").childNodes.length > 1){
+			 document.getElementById("task_dropdown").removeChild(document.getElementById("task_dropdown").lastChild)      
+			 }
+		while(document.getElementById("user_dropdown").childNodes.length > 1){
+			 document.getElementById("user_dropdown").removeChild(document.getElementById("user_dropdown").lastChild)      
+			 }
+		var all_tasks = initializeData();
+		continue_processing();
+	    }
             $(document).ready(function() {
                 var all_tasks = initializeData();
                 continue_processing();
+		document.getElementById("taskbuttononbar").onclick=processEverything;
             });
+				    
 
             function addTask() {
                 var task_dd = document.getElementById("task_dropdown")
