@@ -108,9 +108,7 @@
 		  <h2 class="paper-font-display1">Tasks</h2>
 		</paper-toolbar>
 		<script src="${request.static_url('onboarding:static/scripts/loadtasks.js')}"></script>
-		<task-card task_name="Security Info" task_description="Give us all your information" task_status="Halfway there!" task_progress = "50"></task-card>
-		<task-card task_name="Watch Videos" task_description="Watch all these videos and take quizzes on them" task_status="Done!" task_progress = "100"></task-card>
-		<task-card></task-card>
+		
 
               </section>
 	      

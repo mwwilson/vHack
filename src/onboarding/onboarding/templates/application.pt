@@ -48,14 +48,9 @@
 	  
           <!-- Drawer Content -->
           <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-            <a data-route="home" href="#">
+            <a data-route="home" href="http://0.0.0.0:6543">
               <iron-icon icon="home"></iron-icon>
-              <span>Home</span>
-            </a>
-	    
-            <a data-route="tasks" href="#">
-              <iron-icon icon="info"></iron-icon>
-              <span>Tasks</span>
+              <span>Task List</span>
             </a>
 	    
           </paper-menu>
@@ -72,7 +67,7 @@
             <paper-icon-button icon="search"></paper-icon-button>
 	    
             <!-- Application name -->
-            <div class="middle paper-font-display2 app-name">Onboarding</div>
+            <div class="middle paper-font-display2 app-name">Application</div>
 	    
             <!-- Application sub title -->
             <div class="bottom title"></div>
@@ -81,35 +76,19 @@
 	  
           <!-- Main Content -->
           <div class="content">
+
+	      <paper-material>
+	      <paper-input label="First Name"></paper-input>
+	      <paper-input label="Last Name"></paper-input>
+	      <paper-input label="Date of Birth"></paper-input>
+	    </paper-material>    
             <iron-pages attr-for-selected="data-route" selected="{{route}}">
 	      
               <section data-route="home">
-		<paper-material elevation="1">
-                  <my-greeting></my-greeting>
-              </section>
-	      
-              <section data-route="tasks">
-		<paper-toolbar>
-		  <h2 class="paper-font-display1">Application</h2>
-		</paper-toolbar>
-		<paper-material>
-		  <paper-input label="First Name"></paper-input>
-		  <paper-input label="Last Name"></paper-input>
-		  <paper-input label="Date of Birth"></paper-input>
-		</paper-material>
-
+		<paper-material elevation="1">Derp</paper-material>
               </section>
 	      
 	      
-              <section data-route="user-info">
-		<paper-material elevation="1">
-                  <h2 class="paper-font-display2">
-                    User:<span>{{params.name}}</span>
-                  </h2>
-                  <div>This is <span>{{params.name}}</span>'s section</div>
-		</paper-material>
-              </section>
-	    
 	      
             </iron-pages>
           </div>
