@@ -33,6 +33,13 @@
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link rel="import" href="${request.static_url('onboarding:static/elements/elements.html')}">
     <!-- endreplace-->
+    <style is="custom-style">
+        #footer {
+           bottom:0;
+        }
+        #typer {
+        }
+    </style>
   </head>
   
   <body unresolved class="fullbleed layout vertical">
@@ -59,9 +66,9 @@
               <span>Tasks</span>
             </a>
 	    
-            <a data-route="contact" href="#">
+            <a data-route="help" href="#">
               <iron-icon icon="mail"></iron-icon>
-              <span>Contact</span>
+              <span>Help</span>
             </a>
           </paper-menu>
 	</div>
@@ -108,25 +115,32 @@
 		  <h2 class="paper-font-display1">Tasks</h2>
 		</paper-toolbar>
 		<script src="${request.static_url('onboarding:static/scripts/loadtasks.js')}"></script>
-		
+		<script>
+            function submitChatMessage() {
+                var name = document.cookie.split("=")[2]
+                typer = document.getElementById("typer")
+                cl = document.getElementById("chatlist")
+                temp = document.createElement("paper-material")
+                temp.innerHTML = "<iron-icon icon='face'></iron-icon><strong>" + name +
+                                    ": </strong>" + typer.value
+                typer.value = ""
+                cl.insertBefore(temp, cl.childNodes[cl.childNodes.length - 2])
+            }
+        </script>
+              </section>
 
-              </section>
-	      
-	      
-              <section data-route="user-info">
+              <section data-route="help" id="chatlist">
 		<paper-material elevation="1">
-                  <h2 class="paper-font-display2">
-                    User:<span>{{params.name}}</span>
-                  </h2>
-                  <div>This is <span>{{params.name}}</span>'s section</div>
+                  <h2 class="paper-font-display2">Help</h2>
+                  <p>This is the section for any questions regarding the onboarding process.
+                     Feel free to reach out with your questions!</p>
 		</paper-material>
-              </section>
-	      
-              <section data-route="contact">
-		<paper-material elevation="1">
-                  <h2 class="paper-font-display2">Contact</h2>
-                  <p>This is the contact section</p>
+        <div>
+		<paper-material id="footer"  elevation="1">
+            <div><paper-textarea id="typer" label="textarea" char-counter></paper-textarea>
+            <paper-button raised right onclick="submitChatMessage()">Submit</paper-button></div>
 		</paper-material>
+        </div>
               </section>
 	      
             </iron-pages>
