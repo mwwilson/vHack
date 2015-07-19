@@ -110,7 +110,6 @@
             <iron-icon icon="check"></iron-icon>Submit
           </paper-button>
           </form>
-          <paper-toast id="toast1" text=""></paper-toast>
       </paper-material>  
       <paper-material>  
         <h2>Don't Have an Account? Sign Up!</h2>
@@ -122,8 +121,9 @@
             <iron-icon icon="check"></iron-icon>Submit
           </paper-button>
           </form>
-          <paper-toast id="toast2" text=""></paper-toast>
       </paper-material>
+          <paper-toast id="toast1" text=""></paper-toast>
+          <paper-toast id="toast2" text=""></paper-toast>
     </template>
     
     <!-- build:js scripts/app.js -->
