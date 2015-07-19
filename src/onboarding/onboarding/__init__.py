@@ -64,6 +64,7 @@ def main(global_config, **settings):
     config.add_route('logout', '/logout')
     config.add_route('admin', '/admin')
     config.add_route('signup', '/signup')
+    config.add_route('germantown', '/germantown')
     config.add_route('login_success', '/login_success')
     config.add_route('application', '/application')
     config.add_route('get_tasks', '/get_tasks')
