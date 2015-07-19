@@ -81,7 +81,7 @@ def logout(request):
 @view_config(route_name='offer_letter', renderer='templates/offer_letter.pt')
 def offer_letter(request):   
     response = FileResponse(
-        '/home/mundt/vHack/src/onboarding/onboarding/offer_letters/test.txt', request=request)
+        'static/test.txt', request=request)
     return response
 
 @view_config(route_name='offer_letter_task', renderer='templates/offer_letter_task.pt')
