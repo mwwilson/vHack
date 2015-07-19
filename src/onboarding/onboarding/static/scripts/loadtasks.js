@@ -32,7 +32,9 @@ function processData(count){
 
 function addData(task, count){
     section = document.getElementById("tasklist");
-    html = "<task-card task_name = '" + task + "' task_description='" + dictionary[task]['description'] + "'></task-card>"
+    html = "<task-card task_name = '" + task + "' task_description='" + 
+	dictionary[task]['description'] + "' task_link = '" +
+	dictionary[task]['link'] + "'></task-card>"
     section.innerHTML = section.innerHTML += html
     
     processData(count + 1)
