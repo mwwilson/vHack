@@ -14,6 +14,7 @@ def verify(users, creds):
 @view_config(route_name='home', renderer='templates/mytemplate.pt',
              permission='view')
 def my_view(request):
+    import pdb; pdb.set_trace()
     return {'project': 'onboarding'}
 
 @view_config(route_name='application', renderer='templates/application.pt')
@@ -31,10 +32,12 @@ def signup(request):
     users[creds['username']] = {'password':creds['password']}
     userid = creds['username']
     headers = remember(request, userid)
-    return Response(
+    toReturn = Response(
         'Account for User %s Created' % userid,
         headers=headers
         )
+    toReturn.set_cookie('username', userid)
+    return toReturn
 
 @view_config(route_name='login_success')
 def login_success(request):
@@ -42,10 +45,12 @@ def login_success(request):
     userid = verify(request.registry._get_settings()['users'], creds)
     if userid:
         headers = remember(request, userid)
-        return Response(
+        toReturn = Response(
             'Logged in as User %s' % userid,
             headers=headers
             )
+        toReturn.set_cookie('username', userid)
+        return toReturn
     else:
         return Response('Login Attempt Failed for User %s' % (creds['username']))
 

@@ -40,6 +40,7 @@ def main(global_config, **settings):
     authz_policy = ACLAuthorizationPolicy()
 
     settings['users'] = {}
+    settings['tasks'] = {}
     config = Configurator(settings=settings,
         root_factory=root_factory,
         authentication_policy=authn_policy,
