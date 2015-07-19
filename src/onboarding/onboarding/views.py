@@ -32,7 +32,7 @@ def signup(request):
     userid = creds['username']
     headers = remember(request, userid)
     return Response(
-        'Account for user %s created' % userid,
+        'Account for User %s Created' % userid,
         headers=headers
         )
 
@@ -43,11 +43,11 @@ def login_success(request):
     if userid:
         headers = remember(request, userid)
         return Response(
-            'Logged in as %s' % userid,
+            'Logged in as User %s' % userid,
             headers=headers
             )
     else:
-        return Response('Login attempt failed')
+        return Response('Login Attempt Failed for User %s' % (creds['username']))
 
 @view_config(route_name='logout')
 def logout(request):
