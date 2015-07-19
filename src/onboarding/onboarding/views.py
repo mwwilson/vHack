@@ -46,6 +46,8 @@ def signup(request):
         headers=headers
         )
     toReturn.set_cookie('username', userid)
+    request.registry._get_settings()['users'][userid] = {'password': creds['password'],
+                                                         'tasks'   : {}}
     return toReturn
 
 
