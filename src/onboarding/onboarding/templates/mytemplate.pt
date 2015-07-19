@@ -33,6 +33,13 @@
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link rel="import" href="${request.static_url('onboarding:static/elements/elements.html')}">
     <!-- endreplace-->
+    <style is="custom-style">
+        #footer {
+           bottom:0;
+        }
+        #typer {
+        }
+    </style>
   </head>
   
   <body unresolved class="fullbleed layout vertical">
@@ -108,8 +115,16 @@
 		  <h2 class="paper-font-display1">Tasks</h2>
 		</paper-toolbar>
 		<script src="${request.static_url('onboarding:static/scripts/loadtasks.js')}"></script>
-		
-
+		<script>
+            function submitChatMessage() {
+                typer = document.getElementById("typer")
+                cl = document.getElementById("chatlist")
+                temp = document.createElement("paper-material")
+                temp.innerHTML = typer.value
+                typer.value = ""
+                cl.insertBefore(temp, cl.childNodes[cl.childNodes.length - 2])
+            }
+        </script>
               </section>
 	      
 	      
@@ -122,11 +137,17 @@
 		</paper-material>
               </section>
 	      
-              <section data-route="contact">
+              <section data-route="contact" id="chatlist">
 		<paper-material elevation="1">
                   <h2 class="paper-font-display2">Contact</h2>
                   <p>This is the contact section</p>
 		</paper-material>
+        <div>
+		<paper-material id="footer"  elevation="1">
+            <div><paper-textarea id="typer" label="textarea" char-counter></paper-textarea>
+            <paper-button raised right onclick="submitChatMessage()">Submit</paper-button></div>
+		</paper-material>
+        </div>
               </section>
 	      
             </iron-pages>
