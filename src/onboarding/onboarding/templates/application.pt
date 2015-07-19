@@ -10,6 +10,7 @@
 
     <title>Onboarding Revamp</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="//oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,6 +33,8 @@
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link rel="import" href="${request.static_url('onboarding:static/elements/elements.html')}">
     <!-- endreplace-->
+   
+
   </head>
   
   <body unresolved class="fullbleed layout vertical">
@@ -81,7 +84,6 @@
 		<paper-input label="First Name"></paper-input>
 		<paper-input label="Last Name"></paper-input>
 		<paper-input label="Date of Birth"></paper-input>
-		<paper-button raised>Save</paper-button>
 	      </paper-material>  
 	    </div>
 
@@ -89,12 +91,13 @@
 	      <paper-material>
 		<paper-input label="Email"></paper-input>
 		<paper-input label="Phone"></paper-input>
-		<paper-button raised>Save</paper-button>
 	      </paper-material>
             </div>
 	    
 	    <div>
 	      <paper-button raised id="application_submit">Submit!</paper-button>
+	      <script src="${request.static_url('onboarding:static/scripts/application.js')}"></script>
+	      
 	    </div>
 	  </div>
 	</paper-header-panel>

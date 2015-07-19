@@ -70,10 +70,11 @@ def logout(request):
         headers=headers
         )
 
-#@view_config(route_name='submit')
-#def submit(request):
-#    task_name = request.json()['name']
-#    request.registry._get_settings()['users'][request.cookies['username']][task_name] = "complete"
+@view_config(route_name='submit', renderer="json")
+def submit(request):
+    task_name = request.matchdict['taskname']
+    request.registry._get_settings()['users'][request.cookies['username']][task_name] = "complete"
+    return {'response': 'completed'}
 
 @view_config(route_name='get_tasks', renderer="json")
 def get_tasks(request):

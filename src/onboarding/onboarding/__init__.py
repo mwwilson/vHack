@@ -69,5 +69,6 @@ def main(global_config, **settings):
     config.add_route('get_tasks', '/get_tasks')
     config.add_route('add_task', '/add_task/{user}/{task}')
     config.add_route('get_users_and_tasks', '/get_users_and_tasks')
+    config.add_route('submit', '/submit/{taskname}')
     config.scan()
     return config.make_wsgi_app()
