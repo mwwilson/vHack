@@ -37,6 +37,11 @@
         function submitData() {
             var uname = document.getElementById("login-un").value;
             var pword = document.getElementById("login-pw").value;
+            if (uname.length < 1 || pword.length < 1) {
+                    document.getElementById("toast1").text = "Must have a Username and Password";
+                    document.querySelector('#toast1').show();
+                    return ""
+            }
             toSend = JSON.stringify({'username': uname, 'password': pword})
             $.ajax({
                 type: "POST",
@@ -57,6 +62,11 @@
         function signup() {
             var uname = document.getElementById("signup-un").value;
             var pword = document.getElementById("signup-pw").value;
+            if (uname.length < 1 || pword.length < 1) {
+                    document.getElementById("toast1").text = "Must have a Username and Password";
+                    document.querySelector('#toast1').show();
+                    return ""
+            }
             toSend = JSON.stringify({'username': uname, 'password': pword})
             $.ajax({
                 type: "POST",
@@ -105,7 +115,7 @@
       <paper-material>  
         <h2> Login!</h2>
           <form action='/login_success'>
-          <paper-input id="login-un" label="Username" auto-validate pattern="[a-zA-Z0-9]*" error-message="Letters and Numbers Only"></paper-input>
+          <paper-input id="login-un" label="Username" auto-validate pattern="[a-zA-Z0-9]+" error-message="Letters and Numbers Only"></paper-input>
 
           <paper-input id="login-pw" label="Password" type="password"></paper-input>
           <paper-button raised type='submit' id="login-submit" onclick="submitData()">
@@ -116,7 +126,7 @@
       <paper-material>  
         <h2>Don't Have an Account? Sign Up!</h2>
           <form action='/signup'>
-          <paper-input id="signup-un" label="Username" auto-validate pattern="[a-zA-Z0-9]*" error-message="Letters and Numbers Only"></paper-input>
+          <paper-input id="signup-un" label="Username" auto-validate pattern="[a-zA-Z0-9]+" error-message="Letters and Numbers Only"></paper-input>
 
           <paper-input id="signup-pw" label="Password" type="password"></paper-input>
           <paper-button raised type='submit' id="signup-submit" onclick="signup()">

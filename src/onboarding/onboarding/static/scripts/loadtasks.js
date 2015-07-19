@@ -51,7 +51,11 @@ function addData(task, count){
 	{
 	    
 	    if(dictionary[task] == 'incomplete'){
-		var card = document.createElement("task-card")
+            var card = document.createElement("disabled-task")
+        }
+        else {
+		    var card = document.createElement("task-card")
+        }
 		card.setAttribute("id", task)
 		card.setAttribute("task_description", allTasks[task]['description'])
 		card.setAttribute("task_link", allTasks[task]['link'])
@@ -59,7 +63,6 @@ function addData(task, count){
 		
 		document.getElementById("tasklist").appendChild(card)
 		
-	    }
 	}
     processData(count + 1)
      
