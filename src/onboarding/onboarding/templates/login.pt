@@ -112,7 +112,6 @@
           </form>
           <paper-toast id="toast1" text=""></paper-toast>
       </paper-material>  
-      <div>
       <paper-material>  
         <h2>Don't Have an Account? Sign Up!</h2>
           <form action='/signup'>
@@ -125,7 +124,6 @@
           </form>
           <paper-toast id="toast2" text=""></paper-toast>
       </paper-material>
-      </div>
     </template>
     
     <!-- build:js scripts/app.js -->

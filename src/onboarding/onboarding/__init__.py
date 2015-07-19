@@ -39,8 +39,16 @@ def main(global_config, **settings):
     authn_policy = AuthTktAuthenticationPolicy('soseekrit')
     authz_policy = ACLAuthorizationPolicy()
 
-    settings['users'] = {}
-    settings['tasks'] = {}
+    settings['users'] = {'marshall' : {'password' : 'viasat', 
+                                       'tasks'    : {'application' : 'complete',
+                                                     'interview'   : 'incomplete'
+                                                    }
+                                      },
+                         'Ian'      : {'password' : 'aese',
+                                       'tasks'    : {'application' : 'incomplete'
+                                                    }
+                                      }
+                            }
     config = Configurator(settings=settings,
         root_factory=root_factory,
         authentication_policy=authn_policy,

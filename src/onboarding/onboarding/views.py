@@ -1,5 +1,5 @@
 from pyramid.security import Allow, Authenticated, remember, forget
-from pyramid.view import view_config
+from pyramid.view import view_config, forbidden_view_config
 from pyramid.response import Response
 
 def verify(users, creds):
@@ -19,6 +19,10 @@ def my_view(request):
 @view_config(route_name='application', renderer='templates/application.pt')
 def application(request):
     return {'project': 'onboarding'}
+
+@forbidden_view_config(renderer='templates/login.pt')
+def forbidden(request):
+    return {"You must log in to see that" : "Young Padawan"}
 
 @view_config(route_name='login', renderer='templates/login.pt')
 def login(request):
