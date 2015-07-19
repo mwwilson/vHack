@@ -80,3 +80,17 @@ def get_tasks(request):
     user_name = request.cookies['username']
     return {'response': request.registry._get_settings()['users'][user_name]['tasks']}
 
+@view_config(route_name='get_users_and_tasks', renderer='json', permission='assign')
+def get_users_and_tasks(request):
+    users = request.registry._get_settings()['users']
+    return users
+
+@view_config(route_name='add_task', renderer="json", permission="assign")
+def add_task(request):
+    try:
+        user = request.matchdict['user']
+        task = request.matchdict['task']
+        request.registry._get_settings()['users'][user]['tasks'][task] = 'incomplete'
+        return Response("Task %s added to user %s" % (task, user))
+    except:
+        return Response("Error. Task not added")
