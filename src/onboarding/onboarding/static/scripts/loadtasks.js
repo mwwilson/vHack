@@ -49,20 +49,17 @@ function processData(count){
 function addData(task, count){
     if(Object.keys(dictionary).indexOf(task) != -1)
 	{
-	    var card = document.createElement("task-card")
-	    card.setAttribute("id", task)
-	    card.setAttribute("task_description", allTasks[task]['description'])
-	    card.setAttribute("task_link", allTasks[task]['link'])
-	    card.setAttribute("task_name", task)
 	    
-	    if(dictionary[task] == 'complete'){
-		//card.goLink()
+	    if(dictionary[task] == 'incomplete'){
+		var card = document.createElement("task-card")
+		card.setAttribute("id", task)
+		card.setAttribute("task_description", allTasks[task]['description'])
+		card.setAttribute("task_link", allTasks[task]['link'])
+		card.setAttribute("task_name", task)
+		
+		document.getElementById("tasklist").appendChild(card)
 		
 	    }
-
-	    document.getElementById("tasklist").appendChild(card)
-
-	   
 	}
     processData(count + 1)
      
