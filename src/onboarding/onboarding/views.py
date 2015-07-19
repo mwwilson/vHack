@@ -56,3 +56,5 @@ def logout(request):
         'Logged out',
         headers=headers
         )
+
+@view_config(route_name='submit')

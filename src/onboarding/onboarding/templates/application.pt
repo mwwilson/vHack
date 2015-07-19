@@ -76,22 +76,27 @@
 	  
           <!-- Main Content -->
           <div class="content">
-
+	    <div>
 	      <paper-material>
-	      <paper-input label="First Name"></paper-input>
-	      <paper-input label="Last Name"></paper-input>
-	      <paper-input label="Date of Birth"></paper-input>
-	    </paper-material>    
-            <iron-pages attr-for-selected="data-route" selected="{{route}}">
-	      
-              <section data-route="home">
-		<paper-material elevation="1">Derp</paper-material>
-              </section>
-	      
-	      
-	      
-            </iron-pages>
-          </div>
+		<paper-input label="First Name"></paper-input>
+		<paper-input label="Last Name"></paper-input>
+		<paper-input label="Date of Birth"></paper-input>
+		<paper-button raised>Save</paper-button>
+	      </paper-material>  
+	    </div>
+
+	    <div>
+	      <paper-material>
+		<paper-input label="Email"></paper-input>
+		<paper-input label="Phone"></paper-input>
+		<paper-button raised>Save</paper-button>
+	      </paper-material>
+            </div>
+	    
+	    <div>
+	      <paper-button raised id="application_submit">Submit!</paper-button>
+	    </div>
+	  </div>
 	</paper-header-panel>
       </paper-drawer-panel>
       
