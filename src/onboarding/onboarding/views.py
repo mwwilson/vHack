@@ -97,3 +97,7 @@ def add_task(request):
         return Response("Task %s added to user %s" % (task, user))
     except:
         return Response("Error. Task not added")
+
+@view_config(route_name='training', renderer='templates/training.pt')
+def training(request):
+    return {'project': 'onboarding'}
