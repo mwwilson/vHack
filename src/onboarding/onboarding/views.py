@@ -47,6 +47,11 @@ def signup(request):
     toReturn.set_cookie('username', userid)
     return toReturn
 
+
+@view_config(route_name='germantown', renderer='templates/germantown.pt')
+def germantown(request):
+    return {'project' : 'onboarding'}
+
 @view_config(route_name='login_success')
 def login_success(request):
     creds = request.json_body
