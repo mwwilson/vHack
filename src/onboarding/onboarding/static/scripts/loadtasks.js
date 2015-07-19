@@ -50,7 +50,7 @@ function addData(task, count){
     if(Object.keys(dictionary).indexOf(task) != -1)
 	{
 	    
-	    if(dictionary[task] == 'incomplete'){
+	    if(dictionary[task] == 'complete'){
             var card = document.createElement("disabled-task")
         }
         else {

@@ -85,15 +85,23 @@
     paper-button.ripple paper-ripple {
       color: var(--paper-pink-a200);
     }
+    
+    .finishedprog {
+    width: 100%;
+    }
+
+    #{{task_description}} {
+    width: 100%;
+    }
 
   </style>    
   <template>
     <paper-material elevation="1" class="task" id = {{task_name}}>
       <center class = "paper-font-display1">{{task_name}}</center>
       <p>{{task_description}}</p>
-      <p>{{task_status}}</p>
-      <paper-progress width=100% value={{task_progress}}></paper-progress>
-      <paper-button raised center class="green" disabled id={{task_description}} on-click="goLink"><iron-icon class="check"></iron-icon>Task Completed!</paper-button>
+      <paper-progress width=100% value={{task_progress}} class = "finishedprog"></paper-progress>
+      <br>
+      <paper-button raised center class="green finishedprog" disabled id={{task_description}} on-click="goLink"><iron-icon class="check"></iron-icon>Task Completed!</paper-button>
     </paper-material>
   </template>
 
