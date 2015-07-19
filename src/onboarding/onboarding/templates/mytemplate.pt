@@ -7,6 +7,7 @@
     <meta name="description" content="pyramid web application">
     <meta name="author" content="Pylons Project">
     <link rel="shortcut icon" href="${request.static_url('onboarding:static/pyramid-16x16.png')}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <title>Onboarding Revamp</title>
 
@@ -102,10 +103,11 @@
 				
               </section>
 	      
-              <section data-route="tasks">
+              <section data-route="tasks" id="tasklist">
 		<paper-toolbar>
 		  <h2 class="paper-font-display1">Tasks</h2>
 		</paper-toolbar>
+		<script src="${request.static_url('onboarding:static/scripts/loadtasks.js')}"></script>
 		<task-card task_name="Security Info" task_description="Give us all your information" task_status="Halfway there!" task_progress = "50"></task-card>
 		<task-card task_name="Watch Videos" task_description="Watch all these videos and take quizzes on them" task_status="Done!" task_progress = "100"></task-card>
 		<task-card></task-card>

@@ -1,0 +1,11 @@
+{"Application": 
+ {
+    "description": "Initial employee application",
+    "link": "0.0.0.0:6543/application"
+ },
+ "Interview":
+ {
+     "description": "First interview for new employees",
+     "link": "0.0.0.0:6543/interview"
+ }
+}
